@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <!-- 
+  Манифест — это "паспорт" вашего компонента.
+  Он сообщает Power Apps, как называется ваш компонент и какие данные он принимает.
+  -->
+  <control namespace="TrainingTracker" constructor="StarRatingControl" version="1.0.0" 
+           display-name-key="Star Rating Control" 
+           description-key="Displays a star rating and a comment." 
+           control-type="standard">
+    
+    <!-- 
+    СВОЙСТВА (PROPERTIES)
+    Это данные, которые компонент получает из Power Apps.
+    -->
+    <property name="RatingValue" 
+              display-name-key="Rating Value" 
+              description-key="The numerical rating value (e.g., 1 to 5)" 
+              of-type="Whole.None" 
+              usage="bound" 
+              required="true" />
+              
+    <property name="CommentText" 
+              display-name-key="Comment" 
+              description-key="The feedback comment text" 
+              of-type="Multiple" 
+              usage="bound" 
+              required="false" />
+
+    <!-- Дополнительные свойства для настройки -->
+    <property name="MaxRating" 
+              display-name-key="Max Rating" 
+              description-key="The maximum rating (e.g., 5 stars)" 
+              of-type="Whole.None" 
+              usage="input" 
+              required="false" 
+              default-value="5" />
+              
+    <property name="StarColor" 
+              display-name-key="Star Color" 
+              description-key="The color of the filled stars (hex code)" 
+              of-type="SingleLine.Text" 
+              usage="input" 
+              required="false" 
+              default-value="#FFC107" /> <!-- Золотой цвет -->
+
+    <!-- 
+    РЕСУРСЫ (RESOURCES)
+    Здесь мы подключаем наши файлы CSS и TypeScript.
+    -->
+    <resources>
+      <code path="index.ts" order="1"/>
+      <css path="css/StarRatingControl.css" order="1" />
+    </resources>
+    
+  </control>
+</manifest>

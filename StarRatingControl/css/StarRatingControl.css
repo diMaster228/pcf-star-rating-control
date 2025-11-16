@@ -1,0 +1,47 @@
+/* Этот CSS-файл определяет внешний вид вашего компонента.
+  Он будет автоматически загружен вместе с компонентом.
+*/
+
+.star-rating-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Выравнивание по левому краю */
+  padding: 5px;
+}
+
+.star-container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Стили для нашего SVG-элемента звезды */
+.star-svg {
+  width: 24px;  /* Размер звезды */
+  height: 24px;
+  margin-right: 2px; /* Отступ между звездами */
+  transition: opacity 0.2s ease; /* Плавный переход */
+}
+
+/* --- НОВЫЕ СТИЛИ ДЛЯ ИНТЕРАКТИВНОСТИ --- */
+
+/* Когда компонент интерактивен, меняем курсор */
+.star-container.interactive .star-svg {
+  cursor: pointer;
+}
+
+/* При наведении делаем звезду немного ярче/заметнее */
+.star-container.interactive .star-svg:hover {
+  opacity: 0.7;
+}
+/* --- КОНЕЦ НОВЫХ СТИЛЕЙ --- */
+
+
+.comment-container {
+  margin-top: 8px;
+  font-style: italic;
+  font-size: 14px;
+  color: #555555;
+  /* Позволяет тексту переноситься, если он слишком длинный */
+  white-space: pre-wrap; 
+  word-wrap: break-word;
+}
