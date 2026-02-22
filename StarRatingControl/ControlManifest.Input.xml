@@ -42,7 +42,7 @@
               of-type="SingleLine.Text" 
               usage="input" 
               required="false" 
-              default-value="#FFC107" /> <!-- Золотой цвет -->
+              default-value="#FF9900" /> <!-- Золотисто-оранжевый цвет -->
 
     <!-- 
     РЕСУРСЫ (RESOURCES)

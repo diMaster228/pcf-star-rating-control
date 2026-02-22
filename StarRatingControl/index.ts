@@ -1,4 +1,4 @@
-import {IInputs, IOutputs} from "./generated/ManifestTypes";
+import { IInputs, IOutputs } from "./generated/ManifestTypes";
 
 // Интерфейс для хранения значений свойств из манифеста
 interface IStarRatingProps {
@@ -18,7 +18,7 @@ export class StarRatingControl implements ComponentFramework.StandardControl<IIn
         RatingValue: 0,
         CommentText: null,
         MaxRating: 5,
-        StarColor: "#FFC107",
+        StarColor: "#FF9900",
         EmptyStarColor: "#e0e0e0"
     };
     private _notifyOutputChanged: () => void; // Функция для отправки данных обратно в Power Apps
@@ -39,13 +39,12 @@ export class StarRatingControl implements ComponentFramework.StandardControl<IIn
     /**
      * (ИСПРАВЛЕНИЕ 2: Пустой конструктор удален)
      */
-    
+
     /**
      * Вызывается при инициализации компонента.
      * Здесь мы создаем базовую HTML-структуру.
      */
-    public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container:HTMLDivElement): void
-    {
+    public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container: HTMLDivElement): void {
         this._context = context;
         this._container = container;
         this._notifyOutputChanged = notifyOutputChanged; // Сохраняем функцию обратного вызова
@@ -76,17 +75,17 @@ export class StarRatingControl implements ComponentFramework.StandardControl<IIn
 
         // Определяем, какой рейтинг сейчас нужно показать (приоритет у наведения)
         const displayRating = this._hoverRating > 0 ? this._hoverRating : this._currentRating;
-        
+
         for (let i = 1; i <= this._props.MaxRating!; i++) {
             const starSpan = document.createElement("span");
-            
+
             const isFilled = i <= displayRating;
             const starColor = isFilled ? this._props.StarColor : this._props.EmptyStarColor;
 
             // Вставляем SVG с нужным цветом
             starSpan.innerHTML = this._starSVG;
             const svgElement = starSpan.querySelector("svg path") as SVGPathElement;
-            if(svgElement) {
+            if (svgElement) {
                 svgElement.style.fill = starColor!;
             }
 
@@ -125,14 +124,13 @@ export class StarRatingControl implements ComponentFramework.StandardControl<IIn
      * Вызывается при обновлении любого из входных свойств (properties).
      * Здесь мы перерисовываем компонент.
      */
-    public updateView(context: ComponentFramework.Context<IInputs>): void
-    {
+    public updateView(context: ComponentFramework.Context<IInputs>): void {
         // Получаем актуальные значения из Power Apps
         this._props.RatingValue = context.parameters.RatingValue.raw;
         this._props.CommentText = context.parameters.CommentText.raw;
-        this._props.MaxRating = context.parameters.MaxRating.raw || 5; 
-        this._props.StarColor = context.parameters.StarColor.raw || "#FFC107";
-        this._props.EmptyStarColor = "#e0e0e0"; 
+        this._props.MaxRating = context.parameters.MaxRating.raw || 5;
+        this._props.StarColor = context.parameters.StarColor.raw || "#FF9900";
+        this._props.EmptyStarColor = "#e0e0e0";
 
         // Проверяем, отключен ли компонент (например, в режиме Read-Only)
         this._isInteractive = !context.mode.isControlDisabled;
@@ -142,7 +140,7 @@ export class StarRatingControl implements ComponentFramework.StandardControl<IIn
         this._hoverRating = 0; // Сбрасываем рейтинг при наведении
 
         // Добавляем/убираем класс интерактивности для CSS
-        if(this._isInteractive) {
+        if (this._isInteractive) {
             this._starContainer.classList.add("interactive");
             // Добавляем общий обработчик ухода мыши
             this._starContainer.addEventListener("mouseout", () => this._onStarMouseOut());
@@ -166,8 +164,7 @@ export class StarRatingControl implements ComponentFramework.StandardControl<IIn
     /**
      * Возвращает измененные значения обратно в Power Apps.
      */
-    public getOutputs(): IOutputs
-    {
+    public getOutputs(): IOutputs {
         // Отправляем обратно только измененный RatingValue
         return {
             RatingValue: this._currentRating
@@ -177,8 +174,7 @@ export class StarRatingControl implements ComponentFramework.StandardControl<IIn
     /**
      * Вызывается при удалении компонента.
      */
-    public destroy(): void
-    {
+    public destroy(): void {
         // Очищаем DOM и удаляем обработчики
         this._container.innerHTML = "";
     }
